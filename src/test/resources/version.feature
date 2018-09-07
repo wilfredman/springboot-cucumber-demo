@@ -1,5 +1,5 @@
 Feature: the version can be retrieved
     Scenario: client makes call to GET /version
-      When the client calls /version
-      Then the client receives status code of 200
-      And the client receives server version 1.0
+      When the client receives server version
+      Then the version service status code is 200
+      And the version service response body contains 1.0
