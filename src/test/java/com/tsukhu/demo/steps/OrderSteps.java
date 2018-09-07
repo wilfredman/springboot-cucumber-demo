@@ -20,7 +20,7 @@ public class OrderSteps extends SpringIntegrationTest {
         executeGet("http://localhost:8080/order/"+skuCode+"/");
     }
 
-    @Then("the order service status code is (\\d+)")
+    @Then("the order service status code is (.*)")
     public void the_order_service_status_code_check(int statusCode){
         json = response.then().statusCode(statusCode);
     }
