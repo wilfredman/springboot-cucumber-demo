@@ -1,0 +1,141 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "name",
+    "sku",
+    "shipTo",
+    "billTo"
+  ],
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The Name Schema",
+      "default": "",
+      "examples": [
+        "Ms. Eugene Crooks"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "sku": {
+      "$id": "#/properties/sku",
+      "type": "string",
+      "title": "The Sku Schema",
+      "default": "",
+      "examples": [
+        "ssdsd"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "shipTo": {
+      "$id": "#/properties/shipTo",
+      "type": "object",
+      "title": "The Shipto Schema",
+      "required": [
+        "name",
+        "address",
+        "state",
+        "zip"
+      ],
+      "properties": {
+        "name": {
+          "$id": "#/properties/shipTo/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            "Porter Kiehn"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "address": {
+          "$id": "#/properties/shipTo/properties/address",
+          "type": "string",
+          "title": "The Address Schema",
+          "default": "",
+          "examples": [
+            "40745 Khalil Glen"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "state": {
+          "$id": "#/properties/shipTo/properties/state",
+          "type": "string",
+          "title": "The State Schema",
+          "default": "",
+          "examples": [
+            "NY"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "zip": {
+          "$id": "#/properties/shipTo/properties/zip",
+          "type": "string",
+          "title": "The Zip Schema",
+          "default": "",
+          "examples": [
+            "43060"
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
+    },
+    "billTo": {
+      "$id": "#/properties/billTo",
+      "type": "object",
+      "title": "The Billto Schema",
+      "required": [
+        "name",
+        "address",
+        "state",
+        "zip"
+      ],
+      "properties": {
+        "name": {
+          "$id": "#/properties/billTo/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            "Brianne Macejkovic"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "address": {
+          "$id": "#/properties/billTo/properties/address",
+          "type": "string",
+          "title": "The Address Schema",
+          "default": "",
+          "examples": [
+            "30864 Keebler Branch"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "state": {
+          "$id": "#/properties/billTo/properties/state",
+          "type": "string",
+          "title": "The State Schema",
+          "default": "",
+          "examples": [
+            "VA"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "zip": {
+          "$id": "#/properties/billTo/properties/zip",
+          "type": "string",
+          "title": "The Zip Schema",
+          "default": "",
+          "examples": [
+            "62230"
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
+    }
+  }
+}

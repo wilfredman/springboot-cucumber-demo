@@ -1,13 +1,13 @@
 package com.tsukhu.demo.steps;
 
 import com.tsukhu.demo.SpringIntegrationTest;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
-import io.restassured.config.RestAssuredConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,15 +24,16 @@ public class GoogleBookSteps extends SpringIntegrationTest {
     @Value("${app.googlebooks.url}")
     private String baseURL;
 
-    @Value("${app.endpoint.timeout}")
-    private Integer timeOut;
-
-    @Given("a book exists with an isbn of (.*)")
-    public void a_book_exists_with_isbn(String isbn){
-        RestAssuredConfig config = RestAssured.config().httpClient(HttpClientConfig.httpClientConfig().
+    @Before
+    public void setUp() {
+        config = RestAssured.config().httpClient(HttpClientConfig.httpClientConfig().
                 setParam("http.connection.timeout",timeOut).
                 setParam("http.socket.timeout",timeOut).
                 setParam("http.connection-manager.timeout",timeOut));
+    }
+
+    @Given("a book exists with an isbn of (.*)")
+    public void a_book_exists_with_isbn(String isbn){
         request = given().config(config).param("q", "isbn:" + isbn);
     }
 
