@@ -18,8 +18,19 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 * Hamcrest - Assertions
 * Swagger Request Validator for Rest Assured (swagger-request-validator-restassured) - Use Rest Assured to validate the API response using the swagger spec (TBD)
 * Cucumber (with Spring Boot) - BDD based Integration Test and Component Tests
+* Spring Cloud Contract WireMock
+    * The WireMock server is setup using the @AutoConfigureWireMock(port = 8090) annotation
+    * Also mock responses are setup using the json files
+* Spring Profiles to use the same test using the mock server or hitting the actual endpoints
+    * Dev Mode - All external endpoints are provided using the WireMock server that serves the responses via stubs and mock json output
+    * Integration Mode - Actual endpoints are hit
 
-### Running all the tests
+### Running all the tests in dev mode
 ```cmd
-mvn clean install -Pintegration
+mvn clean install -Pintegration -Dspring.profiles.active=dev
+```
+
+### Running all the tests in integration mode
+```cmd
+mvn clean install -Pintegration -Dspring.profiles.active=integration
 ```

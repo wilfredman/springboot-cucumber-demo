@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
@@ -15,9 +16,15 @@ import static org.hamcrest.Matchers.equalTo;
 @Ignore
 public class OrderSteps extends SpringIntegrationTest {
 
+    @Value("${app.order.path}")
+    private String basePath;
+
+    @Value("${app.order.uri}")
+    private String baseURI;
+
     @When("this client retrieves order by sku (.*)")
     public void the_client_retrieves_order_by_sku(String skuCode){
-        executeGet("http://localhost:8080/order/"+skuCode+"/");
+        executeGet(baseURI,basePath+skuCode+"/");
     }
 
     @Then("the order service status code is (.*)")

@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         glue = {"com.tsukhu.demo.steps"},
-        features = {"src/test/resources"})
+        features = {"src/test/resources/features"})
 public class CucumberIntegrationTest extends SpringIntegrationTest{
 }
