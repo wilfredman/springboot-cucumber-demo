@@ -16,15 +16,38 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 * Rest Assured - Provides the service client APIs using the powerful DSL for creating maintainable tests
 * Rest Assured JSON Schema Validator - Response Schema Validation
 * Hamcrest - Assertions
-* Swagger Request Validator for Rest Assured (swagger-request-validator-restassured) - Use Rest Assured to validate the API response using the swagger spec (TBD)
+* Swagger Request Validator for Rest Assured (`swagger-request-validator-restassured`) - Use Rest Assured to validate the API response using the swagger spec (TBD)
 * Cucumber (with Spring Boot) - BDD based Integration Test and Component Tests
 * Spring Cloud Contract WireMock
-    * The WireMock server is setup using the @AutoConfigureWireMock(port = 8090) annotation
+    * The WireMock server is setup using the `@AutoConfigureWireMock(port = 8090)` annotation
     * Also mock responses are setup using the json files
 * Spring Profiles to use the same test using the mock server or hitting the actual endpoints
-    * Dev Mode - All external endpoints are provided using the WireMock server that serves the responses via stubs and mock json output
-    * Integration Mode - Actual endpoints are hit
+    * `Dev Mode` - All external endpoints are provided using the WireMock server that serves the responses via stubs and mock json output
+    * `Integration Mode` - Actual endpoints are hit
 
+### Application Structure
+
+* Resource Endpoint `/order/{skucode}/` - This is a demo api where the `skucode` is provided as url path variable. 
+ * This will return order details that has the user details populated from the `jsonplaceholder.typicode.com/users` developer API
+
+#### Tests
+
+* The BDD tests are setup using `CucumberIntegrationTest` class that provides the cucumber configuration and depends on
+    * The `SpringIntegrationTest` class : this wires up the spring boot tests and starts the server and the wiremock server at port `8090`
+    * The `steps` folder provides the glue code or test steps (bound to the features)
+    * The `resource\features` folder provides the BDD test scenarios
+* Tests added so far:
+    * `Google Books API Scenario` (**external API test**)- Check books details based on a specific search
+    * `Order API Scenario` (**internal and external API test**) - This is a controller resource API BDD test as well as an external API (called internally by the resource).
+    * `Swapi API Scenario` (**external**)The Starwars API based test.
+* Testing locally / Dev mode:
+    * In a microservices environment we generally do not have access to some of the external dependencies during the development time.
+    * This example uses the `Spring Boot Profiles` and `WireMock` to be able to test in both the dev mode (with no access to external APIs) and integration mode (with direct access to the external APIs)
+        * When spring active profile is set to `dev` : 
+            * Wiremock is used to stub out the external APIs (including the ones used internally by the controller)
+            * Each cucumber step file mocks the respective external APIs
+        * When you are testing in an integration environment set the spring active profile to `integration`
+        
 ### Running all the tests in dev mode
 ```cmd
 mvn clean install -Pintegration -Dspring.profiles.active=dev

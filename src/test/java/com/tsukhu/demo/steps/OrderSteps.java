@@ -32,7 +32,6 @@ public class OrderSteps extends SpringIntegrationTest {
     @Value("${app.user.uri}")
     private String userBaseURI;
 
-
     @Before
     public void setUp() {
 
