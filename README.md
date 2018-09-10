@@ -40,6 +40,12 @@ SpringBoot based integration testing using Cucumber and Rest Assured
     * `Google Books API Scenario` (**external API test**)- Check books details based on a specific search
     * `Order API Scenario` (**internal and external API test**) - This is a controller resource API BDD test as well as an external API (called internally by the resource).
     * `Swapi API Scenario` (**external**)The Starwars API based test.
+    * Gherkin test scenario step types (added)
+        * Basic parameterized GET
+        * Scenario Outline - Data Driven Test template
+        * Response Schema Validation
+        * JSON Response validation using a simple table
+    
 * Testing locally / Dev mode:
     * In a microservices environment we generally do not have access to some of the external dependencies during the development time.
     * This example uses the `Spring Boot Profiles` and `WireMock` to be able to test in both the dev mode (with no access to external APIs) and integration mode (with direct access to the external APIs)
