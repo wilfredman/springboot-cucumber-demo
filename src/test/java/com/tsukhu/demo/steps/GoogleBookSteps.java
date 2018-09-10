@@ -32,7 +32,13 @@ public class GoogleBookSteps extends SpringIntegrationTest {
     public void setUp() {
 
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
-            stubFor(get(urlMatching(basePath+".*")).withQueryParam("q", matching("isbn:.*")).willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBodyFile("mocks/googlebooks.json")));
+            stubFor(get(
+                    urlMatching(basePath+".*"))
+                    .withQueryParam("q", matching("isbn:.*"))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withHeader("Content-Type", "application/json")
+                            .withBodyFile("mocks/googlebooks.json")));
         }
         config = RestAssured
                 .config().httpClient(HttpClientConfig.httpClientConfig().

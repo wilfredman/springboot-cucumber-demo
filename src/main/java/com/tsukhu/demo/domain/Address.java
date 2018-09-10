@@ -1,13 +1,15 @@
 package com.tsukhu.demo.domain;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class Address {
-    private String name;
-    private String address;
-    private String state;
-    private String zip;
+    private String street;
+    private String suite;
+    private String city;
+    private String zipcode;
+    private Geo geo;
 }
+

@@ -17,7 +17,7 @@
       "title": "The Name Schema",
       "default": "",
       "examples": [
-        "Ms. Eugene Crooks"
+        "Leanne Graham"
       ],
       "pattern": "^(.*)$"
     },
@@ -27,7 +27,7 @@
       "title": "The Sku Schema",
       "default": "",
       "examples": [
-        "ssdsd"
+        "ssse"
       ],
       "pattern": "^(.*)$"
     },
@@ -36,51 +36,83 @@
       "type": "object",
       "title": "The Shipto Schema",
       "required": [
-        "name",
-        "address",
-        "state",
-        "zip"
+        "street",
+        "suite",
+        "city",
+        "zipcode",
+        "geo"
       ],
       "properties": {
-        "name": {
-          "$id": "#/properties/shipTo/properties/name",
+        "street": {
+          "$id": "#/properties/shipTo/properties/street",
           "type": "string",
-          "title": "The Name Schema",
+          "title": "The Street Schema",
           "default": "",
           "examples": [
-            "Porter Kiehn"
+            "Kulas Light"
           ],
           "pattern": "^(.*)$"
         },
-        "address": {
-          "$id": "#/properties/shipTo/properties/address",
+        "suite": {
+          "$id": "#/properties/shipTo/properties/suite",
           "type": "string",
-          "title": "The Address Schema",
+          "title": "The Suite Schema",
           "default": "",
           "examples": [
-            "40745 Khalil Glen"
+            "Apt. 556"
           ],
           "pattern": "^(.*)$"
         },
-        "state": {
-          "$id": "#/properties/shipTo/properties/state",
+        "city": {
+          "$id": "#/properties/shipTo/properties/city",
           "type": "string",
-          "title": "The State Schema",
+          "title": "The City Schema",
           "default": "",
           "examples": [
-            "NY"
+            "Gwenborough"
           ],
           "pattern": "^(.*)$"
         },
-        "zip": {
-          "$id": "#/properties/shipTo/properties/zip",
+        "zipcode": {
+          "$id": "#/properties/shipTo/properties/zipcode",
           "type": "string",
-          "title": "The Zip Schema",
+          "title": "The Zipcode Schema",
           "default": "",
           "examples": [
-            "43060"
+            "92998-3874"
           ],
           "pattern": "^(.*)$"
+        },
+        "geo": {
+          "$id": "#/properties/shipTo/properties/geo",
+          "type": "object",
+          "title": "The Geo Schema",
+          "required": [
+            "lat",
+            "lng"
+          ],
+          "properties": {
+            "lat": {
+              "$id": "#/properties/shipTo/properties/geo/properties/lat",
+              "type": "string",
+              "title": "The Lat Schema",
+              "default": "",
+              "examples": [
+                "-37.3159"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "lng": {
+              "$id": "#/properties/shipTo/properties/geo/properties/lng",
+              "type": "string",
+              "title": "The Lng Schema",
+              "default": "",
+              "examples": [
+                "81.1496"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
         }
       }
     },
@@ -89,51 +121,83 @@
       "type": "object",
       "title": "The Billto Schema",
       "required": [
-        "name",
-        "address",
-        "state",
-        "zip"
+        "street",
+        "suite",
+        "city",
+        "zipcode",
+        "geo"
       ],
       "properties": {
-        "name": {
-          "$id": "#/properties/billTo/properties/name",
+        "street": {
+          "$id": "#/properties/billTo/properties/street",
           "type": "string",
-          "title": "The Name Schema",
+          "title": "The Street Schema",
           "default": "",
           "examples": [
-            "Brianne Macejkovic"
+            "Kulas Light"
           ],
           "pattern": "^(.*)$"
         },
-        "address": {
-          "$id": "#/properties/billTo/properties/address",
+        "suite": {
+          "$id": "#/properties/billTo/properties/suite",
           "type": "string",
-          "title": "The Address Schema",
+          "title": "The Suite Schema",
           "default": "",
           "examples": [
-            "30864 Keebler Branch"
+            "Apt. 556"
           ],
           "pattern": "^(.*)$"
         },
-        "state": {
-          "$id": "#/properties/billTo/properties/state",
+        "city": {
+          "$id": "#/properties/billTo/properties/city",
           "type": "string",
-          "title": "The State Schema",
+          "title": "The City Schema",
           "default": "",
           "examples": [
-            "VA"
+            "Gwenborough"
           ],
           "pattern": "^(.*)$"
         },
-        "zip": {
-          "$id": "#/properties/billTo/properties/zip",
+        "zipcode": {
+          "$id": "#/properties/billTo/properties/zipcode",
           "type": "string",
-          "title": "The Zip Schema",
+          "title": "The Zipcode Schema",
           "default": "",
           "examples": [
-            "62230"
+            "92998-3874"
           ],
           "pattern": "^(.*)$"
+        },
+        "geo": {
+          "$id": "#/properties/billTo/properties/geo",
+          "type": "object",
+          "title": "The Geo Schema",
+          "required": [
+            "lat",
+            "lng"
+          ],
+          "properties": {
+            "lat": {
+              "$id": "#/properties/billTo/properties/geo/properties/lat",
+              "type": "string",
+              "title": "The Lat Schema",
+              "default": "",
+              "examples": [
+                "-37.3159"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "lng": {
+              "$id": "#/properties/billTo/properties/geo/properties/lng",
+              "type": "string",
+              "title": "The Lng Schema",
+              "default": "",
+              "examples": [
+                "81.1496"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
         }
       }
     }

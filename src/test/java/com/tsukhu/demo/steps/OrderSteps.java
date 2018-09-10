@@ -1,15 +1,19 @@
 package com.tsukhu.demo.steps;
 
 import com.tsukhu.demo.SpringIntegrationTest;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -21,6 +25,30 @@ public class OrderSteps extends SpringIntegrationTest {
 
     @Value("${app.order.uri}")
     private String baseURI;
+
+    @Value("${app.user.path}")
+    private String userBasePath;
+
+    @Value("${app.user.uri}")
+    private String userBaseURI;
+
+
+    @Before
+    public void setUp() {
+
+        if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
+            stubFor(get(urlMatching(userBasePath+".*"))
+                    .willReturn(
+                            aResponse()
+                                    .withStatus(200)
+                                    .withHeader("Content-Type", "application/json")
+                                    .withBodyFile("mocks/user.json")));
+        }
+        config = RestAssured.config().httpClient(HttpClientConfig.httpClientConfig().
+                setParam("http.connection.timeout",timeOut).
+                setParam("http.socket.timeout",timeOut).
+                setParam("http.connection-manager.timeout",timeOut));
+    }
 
     @When("this client retrieves order by sku (.*)")
     public void the_client_retrieves_order_by_sku(String skuCode){
