@@ -35,18 +35,17 @@ public class OrderSteps extends SpringIntegrationTest {
 
     @Before
     public void setUp() {
-        // For dev mode tests use wiremock stubs and also generate the pact files
-       if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
-           wireMockPact =
-                   WireMockPactGenerator
-                           .builder("orderMs", "jsonPlaceHolderMs")
-                           .withRequestPathWhitelist(
-                                   userBasePath+".*"
-                           )
-                           .build();
-           wiremock.addMockServiceRequestListener(
-                   wireMockPact
-           );
+        wireMockPact =
+                WireMockPactGenerator
+                        .builder("orderMs", "jsonPlaceHolderMs")
+                        .withRequestPathWhitelist(
+                                userBasePath+".*"
+                        )
+                        .build();
+        wiremock.addMockServiceRequestListener(
+                wireMockPact
+        );
+        if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
             wiremock.stubFor(get(urlMatching(userBasePath+".*"))
                     .willReturn(
                             aResponse()

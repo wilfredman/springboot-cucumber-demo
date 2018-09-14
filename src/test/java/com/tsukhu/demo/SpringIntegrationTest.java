@@ -29,7 +29,9 @@ public abstract class SpringIntegrationTest {
 
     @ClassRule
     public static WireMockClassRule wiremock = new WireMockClassRule(
-            WireMockSpring.options().port(8090));
+            WireMockSpring
+                    .options()
+                    .port(8090));
 
     @Value("${app.endpoint.timeout}")
     protected Integer timeOut;

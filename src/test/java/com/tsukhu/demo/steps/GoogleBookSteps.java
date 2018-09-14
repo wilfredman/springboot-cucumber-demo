@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
@@ -42,13 +41,6 @@ public class GoogleBookSteps extends SpringIntegrationTest {
             wiremock.addMockServiceRequestListener(
                     wireMockPact
             );
-            wiremock.stubFor(get(
-                    urlMatching(basePath+".*"))
-                    .withQueryParam("q", matching("isbn:.*"))
-                    .willReturn(aResponse()
-                            .withStatus(200)
-                            .withHeader("Content-Type", "application/json")
-                            .withBodyFile("mocks/googlebooks.json")));
         }
         config = RestAssured
                 .config().httpClient(HttpClientConfig.httpClientConfig().

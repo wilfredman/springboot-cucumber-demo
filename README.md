@@ -20,7 +20,9 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 * Cucumber (with Spring Boot) - BDD based Integration Test and Component Tests
 * Spring Cloud Contract WireMock
     * The WireMock server is setup using the `@AutoConfigureWireMock(port = 8090)` annotation
-    * Also mock responses are setup using the json files
+    * Also mock responses are setup either programmatically wiremock APIs using the json files or placing the wiremock stubs in the [test/resource/mappings](src/test/resources/mappings) folder
+    * As an example the google books api has been wiremock stub has been recorded using the [wiremock standalone server](http://wiremock.org/docs/record-playback/) 
+    * The programmaticaly created wiremock stubs are demonstrated in the files [OrderSteps](src/test/java/com/tsukhu/demo/steps/OrderSteps.java) and [SwapiSteps](src/test/java/com/tsukhu/demo/steps/SwapiSteps.java) 
 * Spring Profiles to use the same test using the mock server or hitting the actual endpoints
     * `Dev Mode` - All external endpoints are provided using the WireMock server that serves the responses via stubs and mock json output
     * `Integration Mode` - Actual endpoints are hit
