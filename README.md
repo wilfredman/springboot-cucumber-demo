@@ -33,6 +33,9 @@ SpringBoot based integration testing using Cucumber and Rest Assured
         * No need of writing separate pact consumer tests.
         * This ensures that what tests you write as BDD cucumber tests also double up as pact tests
 
+#### Approach
+![approach](docs/images/approach.png)
+
 ### Application Structure
 
 * Resource Endpoint `/order/{skucode}/` - This is a demo api where the `skucode` is provided as url path variable. 
