@@ -24,6 +24,12 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 * Spring Profiles to use the same test using the mock server or hitting the actual endpoints
     * `Dev Mode` - All external endpoints are provided using the WireMock server that serves the responses via stubs and mock json output
     * `Integration Mode` - Actual endpoints are hit
+* Automatic Pact file generation for each of the test scenarios , based on the registered Pact listeners using `wiremock-pact-generator`
+    * This can be extended to push the generated pact files to the Pact broker
+    * This is enabled in the `dev` profile and at the end of the execution the `target\pacts` folder contains the generated pact files
+    * Advantage
+        * No need of writing separate pact consumer tests.
+        * This ensures that what tests you write as BDD cucumber tests also double up as pact tests
 
 ### Application Structure
 

@@ -111,6 +111,13 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.atlassian.ta</groupId>
+            <artifactId>wiremock-pact-generator</artifactId>
+            <scope>test</scope>
+            <version>2.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package com.tsukhu.demo.steps;
 
+import com.atlassian.ta.wiremockpactgenerator.WireMockPactGenerator;
 import com.tsukhu.demo.SpringIntegrationTest;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -32,7 +33,16 @@ public class GoogleBookSteps extends SpringIntegrationTest {
     public void setUp() {
 
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
-            stubFor(get(
+            wireMockPact = WireMockPactGenerator
+                    .builder("orderMs", "googleBooksMs")
+                    .withRequestPathWhitelist(
+                            basePath+".*"
+                    )
+                    .build();
+            wiremock.addMockServiceRequestListener(
+                    wireMockPact
+            );
+            wiremock.stubFor(get(
                     urlMatching(basePath+".*"))
                     .withQueryParam("q", matching("isbn:.*"))
                     .willReturn(aResponse()

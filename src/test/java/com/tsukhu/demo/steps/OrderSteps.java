@@ -1,5 +1,6 @@
 package com.tsukhu.demo.steps;
 
+import com.atlassian.ta.wiremockpactgenerator.WireMockPactGenerator;
 import com.tsukhu.demo.SpringIntegrationTest;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -35,8 +36,18 @@ public class OrderSteps extends SpringIntegrationTest {
     @Before
     public void setUp() {
 
-        if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
-            stubFor(get(urlMatching(userBasePath+".*"))
+       if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
+           wireMockPact =
+                   WireMockPactGenerator
+                           .builder("orderMs", "jsonPlaceHolderMs")
+                           .withRequestPathWhitelist(
+                                   userBasePath+".*"
+                           )
+                           .build();
+           wiremock.addMockServiceRequestListener(
+                   wireMockPact
+           );
+            wiremock.stubFor(get(urlMatching(userBasePath+".*"))
                     .willReturn(
                             aResponse()
                                     .withStatus(200)

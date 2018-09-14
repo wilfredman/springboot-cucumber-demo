@@ -1,5 +1,6 @@
 package com.tsukhu.demo.steps;
 
+import com.atlassian.ta.wiremockpactgenerator.WireMockPactGenerator;
 import com.tsukhu.demo.SpringIntegrationTest;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -27,11 +28,22 @@ public class SwapiSteps extends SpringIntegrationTest {
     @Value("${app.swapi.uri}")
     private String baseURI;
 
+
     @Before
     public void setUp() {
 
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
-            stubFor(get(urlMatching(basePath+".*"))
+            wireMockPact =
+                    WireMockPactGenerator
+                            .builder("orderMs", "swapiMs")
+                            .withRequestPathWhitelist(
+                                    basePath+".*"
+                            )
+                            .build();
+            wiremock.addMockServiceRequestListener(
+                    wireMockPact
+            );
+            wiremock.stubFor(get(urlMatching(basePath+".*"))
                     .willReturn(
                             aResponse()
                                     .withStatus(200)
