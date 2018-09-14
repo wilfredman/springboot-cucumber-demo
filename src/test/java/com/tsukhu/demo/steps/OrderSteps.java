@@ -35,7 +35,7 @@ public class OrderSteps extends SpringIntegrationTest {
 
     @Before
     public void setUp() {
-
+        // For dev mode tests use wiremock stubs and also generate the pact files
        if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
            wireMockPact =
                    WireMockPactGenerator

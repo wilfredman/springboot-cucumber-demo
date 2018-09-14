@@ -57,7 +57,11 @@ SpringBoot based integration testing using Cucumber and Rest Assured
     * This example uses the `Spring Boot Profiles` and `WireMock` to be able to test in both the dev mode (with no access to external APIs) and integration mode (with direct access to the external APIs)
         * When spring active profile is set to `dev` : 
             * Wiremock is used to stub out the external APIs (including the ones used internally by the controller)
+            * The Wiremock pact generator is configured as a resource listener on specific external API (producer) urls
             * Each cucumber step file mocks the respective external APIs
+            ![pactConfig](docs/images/test_config.PNG)
+            * Post execution the pact files are automatically generated.
+            ![pactConfig](docs/images/pactfiles.PNG)
         * When you are testing in an integration environment set the spring active profile to `integration`
         
 ### Running all the tests in dev mode
