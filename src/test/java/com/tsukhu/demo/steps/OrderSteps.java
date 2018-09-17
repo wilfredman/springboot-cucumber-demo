@@ -4,10 +4,13 @@ import com.atlassian.ta.wiremockpactgenerator.WireMockPactGenerator;
 import com.tsukhu.demo.SpringIntegrationTest;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
+import io.restassured.http.ContentType;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -53,15 +57,31 @@ public class OrderSteps extends SpringIntegrationTest {
                                     .withHeader("Content-Type", "application/json")
                                     .withBodyFile("mocks/user.json")));
         }
-        config = RestAssured.config().httpClient(HttpClientConfig.httpClientConfig().
-                setParam("http.connection.timeout",timeOut).
-                setParam("http.socket.timeout",timeOut).
-                setParam("http.connection-manager.timeout",timeOut));
     }
+
+    @Given("^order service request is configured$")
+    public void configureService() {
+        request = new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setAccept(ContentType.JSON)
+                .build();
+        config = RestAssured
+                .config().httpClient(HttpClientConfig.httpClientConfig().
+                        setParam("http.connection.timeout", timeOut).
+                        setParam("http.socket.timeout", timeOut).
+                        setParam("http.connection-manager.timeout", timeOut));
+    }
+
+
 
     @When("this client retrieves order by sku (.*)")
     public void the_client_retrieves_order_by_sku(String skuCode){
-        executeGet(baseURI,basePath+skuCode+"/");
+        response = given()
+                .baseUri(baseURI)
+                .pathParam("skuCode",skuCode)
+                .spec(request)
+                .when()
+                .get(basePath+"{skuCode}/");
     }
 
     @Then("the order service status code is (.*)")

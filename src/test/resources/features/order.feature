@@ -1,5 +1,6 @@
 Feature: Get order details
-
+  Background:
+    Given order service request is configured
   Scenario: client calls web service to get order by SKU
     When this client retrieves order by sku AB-15426
     Then the order service status code is 200

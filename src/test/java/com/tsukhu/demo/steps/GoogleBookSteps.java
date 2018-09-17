@@ -31,6 +31,7 @@ public class GoogleBookSteps extends SpringIntegrationTest {
     @Before
     public void setUp() {
 
+        // In dev mode add the pact generator listener
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
             wireMockPact = WireMockPactGenerator
                     .builder("orderMs", "googleBooksMs")
@@ -42,16 +43,35 @@ public class GoogleBookSteps extends SpringIntegrationTest {
                     wireMockPact
             );
         }
+
+    }
+
+    @Given("^service request timeout is set$")
+    public void configureServiceTimeout() {
         config = RestAssured
                 .config().httpClient(HttpClientConfig.httpClientConfig().
-                setParam("http.connection.timeout", timeOut).
-                setParam("http.socket.timeout", timeOut).
-                setParam("http.connection-manager.timeout", timeOut));
+                        setParam("http.connection.timeout", timeOut).
+                        setParam("http.socket.timeout", timeOut).
+                        setParam("http.connection-manager.timeout", timeOut));
     }
 
     @Given("a book exists with an isbn of (.*)")
     public void a_book_exists_with_isbn(String isbn) {
         request = given().baseUri(baseURI).config(config).param("q", "isbn:" + isbn);
+    }
+
+    /**
+     * Add multiple http headers
+     * @param parameters Map of headers to send with name and value
+     */
+    @Given("^the client sets headers to:$")
+    public void client_sets_headers(Map<String, String> parameters) {
+        request = request.given().headers(parameters);
+    }
+
+    @And("^the client has the following cookies set:$")
+    public void client_has_cookies(Map<String, String> cookies) {
+        request = request.given().cookies(cookies);
     }
 
     @When("the client retrieves the book by isbn")
