@@ -28,9 +28,15 @@ public class SwapiSteps extends SpringIntegrationTest {
     @Value("${app.swapi.uri}")
     private String baseURI;
 
-
     @Before
     public void setUp() {
+
+        if (basePath==null) {
+            basePath = "/api/people/";
+        }
+        if (baseURI==null){
+            baseURI = "https://swapi.co";
+        }
 
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
             wireMockPact =

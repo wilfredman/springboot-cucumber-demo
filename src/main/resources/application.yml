@@ -1,0 +1,19 @@
+application:
+  name: spring-cucumber-demo
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+    default-property-inclusion: NON_NULL
+
+app:
+  user:
+    path: /users/
+    uri: https://jsonplaceholder.typicode.com
+
+logging:
+  file: /tmp/logs/app/spring-cucumber-demo.log
+  level:
+    com.tsukhu: DEBUG
+    org.springframework: INFO

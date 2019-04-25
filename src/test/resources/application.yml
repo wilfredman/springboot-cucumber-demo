@@ -1,0 +1,37 @@
+application:
+  name: spring-cucumber-demo
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+    default-property-inclusion: NON_NULL
+
+logging:
+  file: /tmp/logs/app/spring-cucumber-demo.log
+  level:
+    com.tsukhu: DEBUG
+    org.springframework: INFO
+
+app:
+  endpoint:
+    timeout: 10000
+
+---
+
+spring:
+  profiles: integration
+
+app:
+  user:
+    path: /users/
+    uri: https://jsonplaceholder.typicode.com
+  googlebooks:
+    path: /books/v1/volumes/
+    uri: https://www.googleapis.com/
+  swapi:
+    path: /api/people/
+    uri: https://swapi.co
+  order:
+    path: /order/
+    uri: http://localhost:9080/

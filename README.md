@@ -19,7 +19,7 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 * Swagger Request Validator for Rest Assured (`swagger-request-validator-restassured`) - Use Rest Assured to validate the API response using the swagger spec (TBD)
 * Cucumber (with Spring Boot) - BDD based Integration Test and Component Tests
 * Spring Cloud Contract WireMock
-    * The WireMock server is setup using the `@AutoConfigureWireMock(port = 8090)` annotation
+    * The WireMock server is setup using the `@AutoConfigureWireMock(port = 9090)` annotation
     * Also mock responses are setup either programmatically wiremock APIs using the json files or placing the wiremock stubs in the [test/resource/mappings](src/test/resources/mappings) folder
     * As an example the google books api has been wiremock stub has been recorded using the [wiremock standalone server](http://wiremock.org/docs/record-playback/) 
     * The programmaticaly created wiremock stubs are demonstrated in the files [OrderSteps](src/test/java/com/tsukhu/demo/steps/OrderSteps.java) and [SwapiSteps](src/test/java/com/tsukhu/demo/steps/SwapiSteps.java) 
@@ -44,7 +44,7 @@ SpringBoot based integration testing using Cucumber and Rest Assured
 #### Tests
 
 * The BDD tests are setup using `CucumberIntegrationTest` class that provides the cucumber configuration and depends on
-    * The `SpringIntegrationTest` class : this wires up the spring boot tests and starts the server and the wiremock server at port `8090`
+    * The `SpringIntegrationTest` class : this wires up the spring boot tests and starts the server and the wiremock server at port `9090`
     * The `steps` folder provides the glue code or test steps (bound to the features)
     * The `resource\features` folder provides the BDD test scenarios
 * Tests added so far:

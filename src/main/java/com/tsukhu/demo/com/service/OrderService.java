@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -23,7 +24,11 @@ public class OrderService {
         this.restTemplate = builder.build();
     }
 
-    public User fetchUserById(Integer userId) {
-       return restTemplate.getForObject(userBaseURI + userBasePath + "/"+ userId, User.class);
+    public User fetchUserById(Integer userId) throws RestClientException {
+
+        User user = null;
+        user = restTemplate.getForObject(userBaseURI + userBasePath + "/" + userId, User.class);
+
+       return user;
     }
 }

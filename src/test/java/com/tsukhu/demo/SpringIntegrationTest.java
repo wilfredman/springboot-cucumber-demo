@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest(classes = DemoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
-// @AutoConfigureWireMock(port = 8090)
 public abstract class SpringIntegrationTest {
 
     protected RequestSpecification request;
@@ -27,7 +26,7 @@ public abstract class SpringIntegrationTest {
     public static WireMockClassRule wiremock = new WireMockClassRule(
             WireMockSpring
                     .options()
-                    .port(8090));
+                    .port(9090));
 
     @Value("${app.endpoint.timeout}")
     protected Integer timeOut;

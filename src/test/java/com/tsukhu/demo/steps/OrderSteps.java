@@ -11,9 +11,9 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.http.ContentType;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Value;
+import wiremock.org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -39,6 +39,19 @@ public class OrderSteps extends SpringIntegrationTest {
 
     @Before
     public void setUp() {
+
+        if (basePath==null){
+            basePath = "/order/";
+        }
+        if (baseURI==null){
+            baseURI = "http://localhost:9080/";
+        }
+        if (userBasePath==null){
+            userBasePath = "/users/";
+        }
+        if (userBaseURI==null){
+            userBaseURI = "https://jsonplaceholder.typicode.com";
+        }
         wireMockPact =
                 WireMockPactGenerator
                         .builder("orderMs", "jsonPlaceHolderMs")

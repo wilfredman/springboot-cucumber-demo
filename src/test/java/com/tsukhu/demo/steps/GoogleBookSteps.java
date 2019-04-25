@@ -31,6 +31,13 @@ public class GoogleBookSteps extends SpringIntegrationTest {
     @Before
     public void setUp() {
 
+        if (basePath==null){
+            basePath = "/books/v1/volumes/";
+        }
+        if (baseURI==null){
+            baseURI = "https://www.googleapis.com/";
+        }
+
         // In dev mode add the pact generator listener
         if (activeProfile != null && activeProfile.equalsIgnoreCase("dev") ) {
             wireMockPact = WireMockPactGenerator
@@ -76,7 +83,7 @@ public class GoogleBookSteps extends SpringIntegrationTest {
 
     @When("the client retrieves the book by isbn")
     public void the_client_retrieves_the_book_by_isbn() {
-        response = request.when().get(basePath); //"http://localhost:8090/books/v1/volumes/");
+        response = request.when().get(basePath); //"http://localhost:9090/books/v1/volumes/");
         System.out.println("response: " + response.prettyPrint());
     }
 
